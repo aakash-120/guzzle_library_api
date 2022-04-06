@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+    //  echo "inside detauil view";
+    // print_r($data);
+    $title =  $data['title'];
+    $number_of_pages_median = $data['number_of_pages_median'];
+    $isbn = $data['isbn'];
+    $author_name = $data['author_name'];
+    $publish_date = $data['publish_date'];
+    $image = $data['image'];
+    $gid = $data['google_id'];
+
+   if(!empty($gid))
+   {
+
+    $pattern = '/>\s[a-zA-Z0-9-+]+\s/i';
+    $data = preg_match($pattern, (string) $gid, $matches);
+    $google_key1 = substr($matches[0], 2, strlen($matches[0]) - 3);
+   
+    $google_key = "/".$google_key1."?hl=en";
+   }
+  // echo $google_key;
+
+
+    $title2 = '';
+    for ($i = 0; $i < strlen($title); $i++) {
+        if ($title[$i] == ' ') {
+            $title2[$i] = '_';
+        } else {
+            $title2[$i] = $title[$i];
+        }
+    }
+   // echo "title2 = " . $title2;
+
+
+
+    ?>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <?php $html = "";
+
+                $html .= '<div class="col-md-6"> <img class="card-img-top setimg" src="//covers.openlibrary.org/b/olid/' . $image . '.jpg" alt="Card image"></div>
+    <div class="col-md-6">
+
+        <h1 class="display-5 fw-bolder">' . $title . '</h1>
+        <div class="fs-5 mb-5">
+
+
+        </div>
+        
+        <p class="lead "><b>Author:</b>&nbsp;' . $author_name . '</p>
+        <p class="lead "><b>isbn:</b>&nbsp;' . $isbn . '</p>
+        <p class="lead "><b>Published On:</b>&nbsp;' . $publish_date . '</p>
+        <p class="lead "><b>number_of_pages_median:</b>&nbsp;' . $number_of_pages_median . '</p>
+        <div class="d-flex">';
+                if (!empty($gid)) {
+
+                    $html .= '<a class="btn btn-success" href=https://www.google.co.in/books/edition/'.$title2.$google_key.'>Open From Google</a>
+        </div>
+    </div>';
+                }
+                ?>
+                <?php echo $html; ?>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

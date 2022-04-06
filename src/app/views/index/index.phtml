@@ -1,0 +1,111 @@
+<style>
+body {
+    background: #eee
+}
+
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h2 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+}
+</style>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<div class="container mt-5 mb-5">
+<div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+
+        <?php     
+
+foreach($nescafe as $k =>$v)
+{
+    if(is_array($v))
+    {
+    foreach($v as $k1 =>$v1)
+    {
+    //   echo "<pre>";
+    //   print_r($v1['title']);
+    //   print_r($v1['edition_key'][0]);
+    //   echo "google ki id------------------------------";
+    //   if(isset($v1['id_google'][0]))
+    //   {
+    //   print_r($v1['id_google'][0]);
+    //   }
+    //   echo "</pre>";
+    
+
+?>
+           <form action= "/index/detail" method = "post">
+            <div class="row p-2 bg-white border rounded mt-2">
+                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="http://covers.openlibrary.org/b/olid/<?php echo $v1['edition_key'][0]?>-M.jpg"></div>
+                <div class="col-md-6 mt-1">
+                    <h2><?php if(isset($v1['title'])){ echo $v1['title'];}?></h2>
+                    <h5><?php if(isset($v1['publish_date'][0])){ echo $v1['publish_date'][0];}?></h5>
+                    <h5><?php if(isset($v1['number_of_pages_median'])){ echo $v1['number_of_pages_median'];}?></h5>
+                    <h5><?php if(isset($v1['isbn'][0])){ print_r($v1['isbn'][0]);}?></h5>
+                    <h5><?php if(isset($v1['edition_key'][0])){ print_r($v1['edition_key'][0]);}?></h5>
+                    <h5><?php if(isset($v1['author_name'][0])){ print_r($v1['author_name'][0]);}?></h5>
+                   
+                    
+                    <input type = hidden name ="title" value="<?php if(isset($v1['title'])){ echo $v1['title'];}?>">
+                    <input type = hidden name ="publish_date" value="<?php if(isset($v1['publish_date'][0])){ echo $v1['publish_date'][0];}?>">
+                    <input type = hidden name ="number_of_pages_median" value="<?php if(isset($v1['number_of_pages_median'])){ echo $v1['number_of_pages_median'];}?>">
+                    <input type = hidden name ="isbn" value="<?php if(isset($v1['isbn'][0])){ print_r($v1['isbn'][0]);}?>">
+                    <input type = hidden name ="author_name" value="<?php if(isset($v1['author_name'][0])){ print_r($v1['author_name'][0]);}?>">
+                    <input type = hidden name ="image" value="<?php if(isset($v1['edition_key'][0])){ print_r($v1['edition_key'][0]);}?>">
+                    <input type = hidden name ="google_id" value="<?php if(isset($v1['id_google'])){ print_r($v1['id_google']);}?>">
+                    
+
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                       
+                    <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="submit">Details</button>
+                </div>
+                </div>
+            </div>
+    </form>
+          
+           
+
+    <?php
+    }
+}
+}
+    ?>
+     </div>
+        </div>
+    </div>
